@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Dato su JSON</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .box { border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
+        button { cursor: pointer; background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>Express Routing Lab</h1>
+
+    <div class="box">
+        <h2>Dato su JSON</h2>
+        <p>Scrivi qualcosa e clicca su "Send to Server", il dato verrà inviato al server e restituito in formato JSON.</p>
+        <input type="text" id="dato" placeholder="Type something...">
+        <button id="sendBtn">Send to Server</button>
+    </div>
+
+
+    <script>
+        async function inviaServer() {
+            try {
+                const dato1 = document.getElementById('dato').value;
+                const risposta = await fetch('api/dato',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        dato1: dato1,
+                    })
+                });
+                const data = await risposta.json();
+                console.log('Risposta dal server:', data);
+                alert('Dato inviato al server!');
+                document.getElementById('dato').value = '';
+            }
+            catch (error) {
+                console.error('Errore:', error);
+            }
+        }
+        
+        document.getElementById('sendBtn').addEventListener('click', inviaServer);
+    </script>
+</body>
+</html>
+
