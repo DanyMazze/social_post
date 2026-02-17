@@ -8,11 +8,11 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-app.post('/api/dato', (req, res) => {
-    const dato = req.body.dato1;
+app.post('/post', (req, res) => {
+    const dato = req.body;
     console.log('Dato ricevuto:', dato);
     
-    writeFileSync('dati.json', JSON.stringify({ dato: dato }, null, 2));
+    writeFileSync('dati.json', JSON.stringify(dato, null, 2));
     
     res.json({ success: true, dato: dato });
 });

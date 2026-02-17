@@ -16,7 +16,7 @@
         <h2>Dato su JSON</h2>
         <p>Scrivi qualcosa e clicca su "Send to Server", il dato verrà inviato al server e restituito in formato JSON.</p>
         <input type="text" id="dato" placeholder="Type something...">
-        <button id="sendBtn">Send to Server</button>
+        <button id="sendBtn" onclick="inviaServer()">Send to Server</button>
     </div>
 
 
@@ -24,7 +24,7 @@
         async function inviaServer() {
             try {
                 const dato1 = document.getElementById('dato').value;
-                const risposta = await fetch('api/dato',{
+                const risposta = await fetch('/post',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -43,7 +43,6 @@
             }
         }
         
-        document.getElementById('sendBtn').addEventListener('click', inviaServer);
     </script>
 </body>
 </html>
